@@ -9,14 +9,14 @@ public class PermissionService {
 
     private List<Permission> database = new ArrayList<>();
 
-    public void addPermission(Permission hotel){
-        database.add(hotel);
+    public void addPermission(Permission permission){
+        database.add(permission);
     }
 
-    public void editPermission(Permission hotel) {
-        int index = database.indexOf(hotel);
+    public void editPermission(Permission permission) {
+        int index = database.indexOf(permission);
         if(index > 0){
-            database.set(index, hotel);
+            database.set(index, permission);
         }
     }
 

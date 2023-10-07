@@ -56,4 +56,11 @@ public class Room {
     public void setStatus(int status) {
         this.status = status;
     }
+    public Room(int roomNumber){
+        this.roomNumber = roomNumber;
+    }
+
+    public Room(){
+    }
+
 }
