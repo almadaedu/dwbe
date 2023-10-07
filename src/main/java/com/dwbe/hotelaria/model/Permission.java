@@ -1,4 +1,4 @@
-package com.dwbe.hotelaria.entity;
+package com.dwbe.hotelaria.model;
 
 import jakarta.persistence.*;
 @Entity
@@ -55,5 +55,12 @@ public class Permission {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Permission(String permissionTitle){
+        this.title = permissionTitle;
+    }
+
+    public Permission(){
     }
 }

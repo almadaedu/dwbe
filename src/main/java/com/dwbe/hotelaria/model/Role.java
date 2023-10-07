@@ -1,4 +1,4 @@
-package com.dwbe.hotelaria.entity;
+package com.dwbe.hotelaria.model;
 
 import jakarta.persistence.*;
 @Entity

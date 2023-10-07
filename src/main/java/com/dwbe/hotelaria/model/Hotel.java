@@ -1,4 +1,4 @@
-package com.dwbe.hotelaria.entity;
+package com.dwbe.hotelaria.model;
 
 
 import jakarta.persistence.*;
@@ -68,5 +68,12 @@ public class Hotel {
 
     public void setRent(String rent) {
         this.rent = rent;
+    }
+
+    public Hotel(String hotelname){
+        this.hotelName = hotelname;
+    }
+
+    public Hotel(){
     }
 }

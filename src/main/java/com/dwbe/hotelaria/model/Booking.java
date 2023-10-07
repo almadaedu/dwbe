@@ -1,4 +1,4 @@
-package com.dwbe.hotelaria.entity;
+package com.dwbe.hotelaria.model;
 
 import jakarta.persistence.*;
 
@@ -58,5 +58,12 @@ public class Booking {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Booking(String bookingType){
+        this.type = bookingType;
+    }
+
+    public Booking(){
     }
 }

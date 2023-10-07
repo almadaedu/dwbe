@@ -1,4 +1,4 @@
-package com.dwbe.hotelaria.entity;
+package com.dwbe.hotelaria.model;
 
 import jakarta.persistence.*;
 
@@ -49,5 +49,12 @@ public class Payment {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Payment(String paymentAmount){
+        this.amount = paymentAmount;
+    }
+
+    public Payment(){
     }
 }
