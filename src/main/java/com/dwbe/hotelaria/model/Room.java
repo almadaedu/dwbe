@@ -1,66 +1,38 @@
-package com.dwbe.hotelaria.model;
-
-import jakarta.persistence.*;
-@Entity
-@Table(name="room",schema = "hotelreservation")
-public class Room {
-    @Id
-    @Column
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private int roomId;
-    @Column
-    private int hotelId;
-    @Column
-    private int roomNumber;
-    @Column
-    private String category;
-    @Column
-    private int status;
-
-    public int getRoomId() {
-        return roomId;
-    }
-
-    public void setRoomId(int roomId) {
-        this.roomId = roomId;
-    }
-
-    public int getHotelId() {
-        return hotelId;
-    }
-
-    public void setHotelId(int hotelId) {
-        this.hotelId = hotelId;
-    }
-
-    public int getRoomNumber() {
-        return roomNumber;
-    }
-
-    public void setRoomNumber(int roomNumber) {
-        this.roomNumber = roomNumber;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-    public Room(int roomNumber){
-        this.roomNumber = roomNumber;
-    }
-
-    public Room(){
-    }
-
-}
+//package com.dwbe.hotelaria.model;
+//
+//import jakarta.persistence.*;
+//import jakarta.validation.constraints.NotBlank;
+//import jakarta.validation.constraints.NotNull;
+//import jakarta.validation.constraints.Size;
+//import lombok.AllArgsConstructor;
+//import lombok.Builder;
+//import lombok.Data;
+//import lombok.NoArgsConstructor;
+//
+//@Data
+//@Builder
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@Entity
+//@Table(name= Room.TABLE_NAME)
+//public class Room {
+//    public  static final String TABLE_NAME = "room";
+//
+//    @Id
+//    @Column
+//    @GeneratedValue(strategy= GenerationType.AUTO)
+//    private Long id;
+//
+//    @Column(name = "title", nullable = false)
+//    @Size(min = 1, max = 200, message = "O campo 'Título' deve conter entre 1 e 200 caracteres")
+//    private String title;
+//
+//    @Column(name = "cost", nullable = false)
+//    @NotNull(message = "O campo 'Custo' não deve ser nulo")
+//    private Float cost;
+//
+//    @Column(name = "category", nullable = false)
+//    @Size(min = 1, max = 200, message = "O campo 'Categoria' deve conter entre 1 e 200 caracteres")
+//    private String category;
+//
+//}

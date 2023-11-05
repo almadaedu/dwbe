@@ -1,97 +1,49 @@
-package com.dwbe.hotelaria.model;
-
-import jakarta.persistence.*;
-
-@Entity
-@Table(name="customer",schema="hotelreservation")
-public class Customer {
-    @Id
-    @Column
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private int customerId;
-    @Column
-    private String name;
-    @Column
-    private String age;
-    @Column
-    private String rg;
-    @Column
-    private String cpf;
-    @Column
-    private String mobile;
-    @Column
-    private String email;
-    @Column
-    private String address;
-
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
-    }
-
-    public String getRg() {
-        return rg;
-    }
-
-    public void setRg(String rg) {
-        this.rg = rg;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public Customer(String customername){
-        this.name = customername;
-    }
-
-    public Customer(){
-    }
-}
+//package com.dwbe.hotelaria.model;
+//
+//import jakarta.persistence.*;
+//import jakarta.validation.constraints.NotNull;
+//import jakarta.validation.constraints.Size;
+//import lombok.AllArgsConstructor;
+//import lombok.Builder;
+//import lombok.Data;
+//import lombok.NoArgsConstructor;
+//
+//import java.time.LocalDate;
+//
+//@Data
+//@Builder
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@Entity
+//@Table(name= Customer.TABLE_NAME)
+//public class Customer {
+//
+//    public static final String TABLE_NAME = "customer";
+//
+//    @Id
+//    @Column
+//    @GeneratedValue(strategy= GenerationType.IDENTITY)
+//    private Long id;
+//
+//    @Column(name = "name", nullable = false)
+//    @Size(min = 1, max = 200, message = "O campo 'Nome' deve conter entre 1 e 200 caracteres")
+//    private String name;
+//
+//    @Column(name = "birth", nullable = false)
+//    @NotNull(message = "O campo 'Data de Nascimento' é obrigatório")
+//    private LocalDate birth;
+//
+//    @Column(name = "rg", unique = true, nullable = false)
+//    @Size(min = 14, max = 14, message = "O campo 'RG' deve conter 14 caracteres")
+//    private String rg;
+//
+//    @Column(name = "cpf", unique = true, nullable = false)
+//    @Size(min = 14, max = 14, message = "O campo 'CPF' deve conter 14 caracteres")
+//    private String cpf;
+//
+//    @Column(name = "cell", nullable = true)
+//    @Size(min = 16, max = 16, message = "O campo 'Nº de Celular' deve conter 16 caracteres")
+//    private String cell;
+//
+//
+//}

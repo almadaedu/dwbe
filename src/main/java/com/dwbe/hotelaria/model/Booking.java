@@ -1,69 +1,43 @@
-package com.dwbe.hotelaria.model;
-
-import jakarta.persistence.*;
-
-import java.util.Date;
-
-@Entity
-@Table(name="booking",schema="hotelreservation")
-public class Booking {
-    @Id
-    @Column
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private int bookingId;
-    @Column
-    private String type;
-    @Column
-    private String title;
-    @Column
-    private String description;
-    @Column
-    private Date date;
-
-    public int getBookingId() {
-        return bookingId;
-    }
-
-    public void setBookingId(int bookingId) {
-        this.bookingId = bookingId;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Booking(String bookingType){
-        this.type = bookingType;
-    }
-
-    public Booking(){
-    }
-}
+//package com.dwbe.hotelaria.model;
+//
+//import jakarta.persistence.*;
+//import jakarta.validation.constraints.NotNull;
+//import jakarta.validation.constraints.Size;
+//import lombok.AllArgsConstructor;
+//import lombok.Builder;
+//import lombok.Data;
+//import lombok.NoArgsConstructor;
+//
+//import java.time.LocalDate;
+//@Data
+//@Builder
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@Entity
+//@Table(name= Booking.TABLE_NAME)
+//public class Booking {
+//
+//    public static final String TABLE_NAME = "booking";
+//
+//    @Id
+//    @Column
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    private Integer id;
+//
+//    private Customer customerBookingId;
+//
+//    private Customer customerBookingName;
+//
+//    private Customer customerBookingCell;
+//
+//    @Column(name = "status", nullable = false)
+//    @NotNull(message = "O campo 'Status' é obrigatório")
+//    private String status;
+//
+//    @Column(name = "orderDate", nullable = false)
+//    @NotNull(message = "O campo 'Data de Registro' é obrigatório")
+//    private LocalDate orderDate;
+//
+//}
+//
+//

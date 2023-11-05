@@ -1,46 +1,34 @@
-package com.dwbe.hotelaria.model;
-
-import jakarta.persistence.*;
-@Entity
-@Table(name="role",schema="hotelreservation")
-public class Role {
-    @Id
-    @Column
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private int roleId;
-    @Column
-    private String title;
-    @Column
-    private String description;
-
-    public int getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Role(String roleTitle){
-        this.title = roleTitle;
-    }
-
-    public Role(){
-    }
-}
+//package com.dwbe.hotelaria.model;
+//
+//import jakarta.persistence.*;
+//import jakarta.validation.constraints.Size;
+//import lombok.AllArgsConstructor;
+//import lombok.Builder;
+//import lombok.Data;
+//import lombok.NoArgsConstructor;
+//
+//
+//@Data
+//@Builder
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@Entity
+//@Table(name= Role.TABLE_NAME)
+//public class Role {
+//
+//    public  static final String TABLE_NAME = "role";
+//    @Id
+//    @Column
+//    @GeneratedValue(strategy= GenerationType.AUTO)
+//    private Integer id;
+//
+//    @Column(name = "title", nullable = false)
+//    @Size(min = 1, max = 200, message = "O campo 'Título' deve conter entre 1 e 200 caracteres")
+//    private String title;
+//
+//    @Column(name = "description", nullable = false)
+//    @Size(min = 1, max = 200, message = "O campo 'Nome' deve conter entre 1 e 200 caracteres")
+//    private String description;
+//
+//
+//}
