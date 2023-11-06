@@ -1,4 +1,5 @@
 package com.dwbe.hotelaria.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -11,16 +12,17 @@ import lombok.NoArgsConstructor;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Entity
-@Table(name = "\"user\"")
+@Table
+@Entity(name = "\"user\"")
 public class User implements Serializable {
-
 
     @Serial
     private static final long serialVersionUID = 279878420822277989L;
@@ -51,6 +53,9 @@ public class User implements Serializable {
     @Size(min = 1, max = 16, message = "O campo 'Nº de Celular' deve conter 16 caracteres")
     private String cell;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "client")
+    private List<Booking> booking = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {
