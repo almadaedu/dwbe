@@ -15,11 +15,10 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name= Booking.TABLE_NAME)
+@EqualsAndHashCode
+@Table(name="booking")
 
 public class Booking implements Serializable {
-
-    public static final String TABLE_NAME = "booking";
 
     @Serial
     private static final long serialVersionUID = 27759670452031371L;
@@ -52,18 +51,6 @@ public class Booking implements Serializable {
 //        setBookingStatus(bookingStatus);
 //    }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Booking booking = (Booking) o;
-        return Objects.equals(id, booking.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }
 
 
