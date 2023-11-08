@@ -39,4 +39,9 @@ public class Room implements Serializable {
     @Column(name = "image", nullable = false)
     private String imgUrl;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    private Category category;
+
+
 }

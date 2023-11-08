@@ -28,5 +28,8 @@ public class Category implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "category")
+    private Set<Room> rooms;
 
 }
