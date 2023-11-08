@@ -1,8 +1,10 @@
 package com.dwbe.hotelaria.controller;
-import com.dwbe.hotelaria.model.Booking;
-import com.dwbe.hotelaria.model.User;
-import com.dwbe.hotelaria.repositories.UserRepository;
-import com.dwbe.hotelaria.service.UserService;
+
+import com.dwbe.hotelaria.model.Category;
+import com.dwbe.hotelaria.model.Room;
+import com.dwbe.hotelaria.service.CategoryService;
+import com.dwbe.hotelaria.service.RoomService;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,30 +16,31 @@ import java.util.List;
 
 @RestController
 @NoArgsConstructor
-@RequestMapping(value = "/users")
-public class UserController {
+@AllArgsConstructor
+@RequestMapping(value = "/room")
+public class RoomController {
 
     @Autowired
-    private UserService userService;
+    private RoomService roomService;
 
     @Autowired
-    private UserRepository userRepository;
+    private CategoryService categoryService;
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll() {
-        List<User> list = userService.findAll();
+    public ResponseEntity<List<Room>> findAll() {
+        List<Room> list = roomService.findAll();
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<User> findById(@PathVariable Long id) {
-        User obj = userService.findById(id);
+    public ResponseEntity<Room> findById(@PathVariable Long id){
+        Room obj = roomService.findById(id);
         return ResponseEntity.ok().body(obj);
     }
 
     @PostMapping
-    public ResponseEntity<User> insert(@RequestBody User obj) {
-        obj = userService.insert(obj);
+    public ResponseEntity<Room> insert(@RequestBody Room obj) {
+        obj = roomService.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).body(obj);

@@ -9,9 +9,7 @@ import lombok.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Data
 @Builder
@@ -53,5 +51,5 @@ public class User implements Serializable {
 
     @JsonIgnore
     @OneToMany(mappedBy = "client")
-    private List<Booking> booking = new ArrayList<>();
+    private Set<Booking> booking = new HashSet<>();
 }

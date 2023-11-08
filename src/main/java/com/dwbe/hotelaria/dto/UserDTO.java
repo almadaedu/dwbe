@@ -1,5 +1,6 @@
 package com.dwbe.hotelaria.dto;
 
+import com.dwbe.hotelaria.model.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
@@ -43,5 +44,5 @@ public class UserDTO {
     @NotNull(message = "O campo 'Nº de Celular' é obrigatório")
     @Size(min = 1, max = 16, message = "O campo 'Nº de Celular' deve conter 16 caracteres")
     private String cell;
-    
+
 }

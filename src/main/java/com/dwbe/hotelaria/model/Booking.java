@@ -1,6 +1,5 @@
 package com.dwbe.hotelaria.model;
 
-import com.dwbe.hotelaria.model.enums.BookingStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
@@ -8,7 +7,6 @@ import lombok.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.Objects;
 
 @Data
 @Builder
@@ -35,21 +33,9 @@ public class Booking implements Serializable {
     @Column(name = "booking_status")
     private Integer bookingStatus;
 
-    @ManyToOne
-    @JoinColumn(name = "client_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "client_id", referencedColumnName = "id")
     private User client;
-
-//    public BookingStatus getBookingStatus() {
-//        return BookingStatus.valueOf(bookingStatus);
-//    }
-//    public void setBookingStatus(BookingStatus bookingStatus) {
-//        if (bookingStatus != null) {
-//            this.bookingStatus = bookingStatus.getCode();
-//        }
-//    }
-//    public Booking (BookingStatus bookingStatus) {
-//        setBookingStatus(bookingStatus);
-//    }
 
 }
 
