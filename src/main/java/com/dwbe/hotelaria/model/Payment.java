@@ -29,8 +29,10 @@ public class Payment implements Serializable {
     @Column(name = "payment_moment")
     private Instant moment;
 
-//    @OneToOne
-//    @MapsId
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinTable(name = "payment_booking", joinColumns = {
+//            @JoinColumn(name = "payment_id", referencedColumnName = "id") }, inverseJoinColumns = {
+//            @JoinColumn(name = "booking_id", referencedColumnName = "id") })
 //    private Booking booking;
 
 }

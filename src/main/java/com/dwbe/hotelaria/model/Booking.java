@@ -37,6 +37,10 @@ public class Booking implements Serializable {
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     private User client;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "payment_id")
+    private Payment payment;
+
 }
 
 

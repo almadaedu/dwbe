@@ -1,6 +1,7 @@
 package com.dwbe.hotelaria.service;
 
 import com.dwbe.hotelaria.model.Payment;
+import com.dwbe.hotelaria.model.Room;
 import com.dwbe.hotelaria.repositories.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,4 +23,9 @@ public class PaymentService {
         Optional<Payment> obj = paymentRepository.findById(id);
         return obj.get();
     }
+
+    public Payment insert(Payment obj) {
+        return paymentRepository.save(obj);
+    }
+
 }

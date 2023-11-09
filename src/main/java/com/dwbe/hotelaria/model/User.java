@@ -51,5 +51,5 @@ public class User implements Serializable {
 
     @JsonIgnore
     @OneToMany(mappedBy = "client")
-    private Set<Booking> booking = new HashSet<>();
+    private Set<Booking> booking;
 }

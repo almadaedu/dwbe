@@ -1,8 +1,9 @@
 package com.dwbe.hotelaria.controller;
 
 
-import com.dwbe.hotelaria.model.Booking;
-import com.dwbe.hotelaria.model.User;
+import com.dwbe.hotelaria.model.*;
+import com.dwbe.hotelaria.repositories.BookingRepository;
+import com.dwbe.hotelaria.repositories.UserRepository;
 import com.dwbe.hotelaria.service.BookingService;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.awt.print.Book;
 import java.net.URI;
 import java.util.List;
 
@@ -20,6 +22,12 @@ public class BookingController {
 
     @Autowired
     private BookingService bookingService;
+
+    @Autowired
+    private BookingRepository bookingRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping
     public ResponseEntity<List<Booking>> findAll() {
@@ -40,6 +48,16 @@ public class BookingController {
         Booking obj = bookingService.findById(id);
         return ResponseEntity.ok().body(obj);
     }
+
+    @PutMapping("/{bookingId}/user/{userId}")
+    public Booking assignBookingToClient(@PathVariable Long bookingId, @PathVariable Long userId){
+        Booking booking = bookingRepository.findById(bookingId).get();
+        User user = userRepository.findById(userId).get();
+        booking.setClient(user);
+        return bookingRepository.save(booking);
+    }
+
+
 
 }
 
