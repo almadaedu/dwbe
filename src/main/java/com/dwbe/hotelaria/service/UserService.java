@@ -1,8 +1,6 @@
 package com.dwbe.hotelaria.service;
 
-import com.dwbe.hotelaria.model.Booking;
 import com.dwbe.hotelaria.model.User;
-import com.dwbe.hotelaria.repositories.BookingRepository;
 import com.dwbe.hotelaria.repositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-
 @Service
 public class UserService {
 
