@@ -1,5 +1,6 @@
 package com.dwbe.hotelaria.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -39,9 +40,12 @@ public class Room implements Serializable {
     @Column(name = "image", nullable = false)
     private String imgUrl;
 
+    @JsonIgnore
+    @ManyToMany(mappedBy = "rooms")
+    private List<Booking> bookings = new ArrayList<>();
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
-
 
 }

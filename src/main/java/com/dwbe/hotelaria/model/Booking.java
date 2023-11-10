@@ -1,12 +1,18 @@
 package com.dwbe.hotelaria.model;
 
+import com.dwbe.hotelaria.model.enums.BookingStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -31,11 +37,15 @@ public class Booking implements Serializable {
     private Instant moment;
 
     @Column(name = "booking_status")
-    private Integer bookingStatus;
+    private BookingStatus bookingStatus;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     private User client;
+
+    @ManyToMany
+    @JoinTable(name = "booked_rooms", joinColumns = @JoinColumn(name = "booking_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "room_id", referencedColumnName = "id"))
+    private List<Room> rooms = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "payment_id")

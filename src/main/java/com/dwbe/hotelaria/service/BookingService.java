@@ -34,5 +34,4 @@ public class BookingService {
         return bookingRepository.save(obj);
     }
 
-
 }

@@ -1,7 +1,9 @@
 package com.dwbe.hotelaria.controller;
 
+import com.dwbe.hotelaria.model.Booking;
 import com.dwbe.hotelaria.model.Category;
 import com.dwbe.hotelaria.model.Room;
+import com.dwbe.hotelaria.repositories.BookingRepository;
 import com.dwbe.hotelaria.repositories.CategoryRepository;
 import com.dwbe.hotelaria.repositories.RoomRepository;
 import com.dwbe.hotelaria.service.CategoryService;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @NoArgsConstructor
@@ -32,7 +35,7 @@ public class RoomController {
     private CategoryRepository categoryRepository;
 
     @Autowired
-    private CategoryService categoryService;
+    private BookingRepository bookingRepository;
 
     @GetMapping
     public ResponseEntity<List<Room>> findAll() {

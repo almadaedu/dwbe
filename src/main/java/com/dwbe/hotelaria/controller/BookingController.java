@@ -3,6 +3,7 @@ package com.dwbe.hotelaria.controller;
 
 import com.dwbe.hotelaria.model.*;
 import com.dwbe.hotelaria.repositories.BookingRepository;
+import com.dwbe.hotelaria.repositories.RoomRepository;
 import com.dwbe.hotelaria.repositories.UserRepository;
 import com.dwbe.hotelaria.service.BookingService;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.awt.print.Book;
 import java.net.URI;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @NoArgsConstructor
@@ -28,6 +30,9 @@ public class BookingController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private RoomRepository roomRepository;
 
     @GetMapping
     public ResponseEntity<List<Booking>> findAll() {
@@ -57,6 +62,16 @@ public class BookingController {
         return bookingRepository.save(booking);
     }
 
+    @PutMapping("/{bookingId}/room/{roomId}")
+    public Booking assignRoomToBooking(@PathVariable Long roomId, @PathVariable Long bookingId) {
+        List<Room> roomSet = null;
+        Room room = roomRepository.findById(roomId).get();
+        Booking booking = bookingRepository.findById(bookingId).get();
+        roomSet = booking.getRooms();
+        roomSet.add(room);
+        booking.setRooms(roomSet);
+        return bookingRepository.save(booking);
+    }
 
 
 }
