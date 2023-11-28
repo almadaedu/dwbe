@@ -32,11 +32,6 @@ public class User implements Serializable {
     @Size(min = 1, max = 200, message = "O campo 'Nome' deve conter entre 1 e 200 caracteres")
     private String name;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) //Garantir que a senha seja apenas escrita e não lida
-    @Column(name = "password", nullable = false)
-    @Size(min = 8, max = 60, message = "O campo 'Senha' deve conter entre 8 e 60 caracteres")
-    private String password;
-
     @Column(name = "cpf", unique = true, nullable = false)
     @Size(min = 11, max = 11, message = "O campo 'CPF' deve conter 14 caracteres")
     private String cpf;
