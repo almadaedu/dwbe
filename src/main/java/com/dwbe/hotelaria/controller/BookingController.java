@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @NoArgsConstructor
+@CrossOrigin(origins = "*")
 @RequestMapping(value = "/booking")
 public class BookingController {
 

@@ -1,0 +1,27 @@
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 10vh;
+    background-color: dodgerblue;
+    margin-bottom: 20px;
+}
+
+nav{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+li{
+    list-style: none;
+    color: aliceblue;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.tab{
+    text-decoration: none;
+   color: #fff;
+}

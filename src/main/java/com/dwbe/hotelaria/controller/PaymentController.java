@@ -21,6 +21,7 @@ import java.util.List;
 @RestController
 @NoArgsConstructor
 @AllArgsConstructor
+@CrossOrigin(origins = "*")
 @RequestMapping(value = "/payment")
 public class PaymentController {
 

@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping(value = "/category")
 public class CategoryController {
 

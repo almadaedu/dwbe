@@ -1,0 +1,10 @@
+/* Estilizando um input do tipo button */
+input[type="submit"] {
+    background-color: dodgerblue;
+    color: white;
+    border: none; 
+    padding: 10px; 
+    border-radius: 10px; 
+    cursor: pointer; 
+    margin-top: 10px;
+}

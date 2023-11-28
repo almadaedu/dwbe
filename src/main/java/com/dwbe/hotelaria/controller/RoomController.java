@@ -22,6 +22,7 @@ import java.util.Set;
 @RestController
 @NoArgsConstructor
 @AllArgsConstructor
+@CrossOrigin(origins = "*")
 @RequestMapping(value = "/room")
 public class RoomController {
 

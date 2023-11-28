@@ -1,0 +1,18 @@
+div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input {
+    border-radius: 10px;
+    padding: 10px;
+}
+
+div input {
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid gray;
+
+    min-width: 500px; 
+}

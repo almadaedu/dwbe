@@ -37,7 +37,7 @@ public class Room implements Serializable {
     @Column(name = "price", nullable = false)
     private Double price;
 
-    @Column(name = "image", nullable = false)
+    @Column(name = "image")
     private String imgUrl;
 
     @JsonIgnore
