@@ -9,6 +9,7 @@ import lombok.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -33,8 +34,8 @@ public class Booking implements Serializable {
     private Long id;
 
     @Column(name = "moment")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT" )
-    private Instant moment;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "GMT" )
+    private LocalDateTime moment;
 
     @Column(name = "booking_status")
     private BookingStatus bookingStatus;
