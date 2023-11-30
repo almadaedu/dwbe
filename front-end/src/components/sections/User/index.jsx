@@ -8,7 +8,7 @@ const User = () => {
   const [cpf, setCpf] = useState("");
   const [birth, setBirth] = useState("");
   const [cell, setCell] = useState("");
-  const [dadosEnviados, setDadosEnviados] = useState([]);
+  const [users, setUsers] = useState([]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -21,81 +21,93 @@ const User = () => {
         cell,
       });
 
-      if (response.status === 200 || 201) {
-        console.log("Dados enviados com sucesso!");
-        setDadosEnviados([
-          ...dadosEnviados,
-          { name, cpf, birth, cell },
-        ]);
+      if (response.status === 200 || response.status === 201) {
+        console.log("Usuário cadastrado com sucesso!");
+        setUsers([...users, { name, cpf, birth, cell }]);
       } else {
-        console.error("Erro ao enviar os dados");
+        console.error("Erro ao cadastrar usuário");
       }
     } catch (error) {
-      console.error("Erro:", error);
+      console.error("Erro:", error.message);
     }
   };
 
-  useEffect(()=>{
-    fetch("http://localhost:8080/users")
-    .then(res=>res.json())
-    .then((result)=>{
-      setDadosEnviados(result);
-    }
-  )
-  },[])
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/users")
+      .then((response) => setUsers(response.data))
+      .catch((error) => console.error("Erro ao carregar usuários", error));
+  }, []);
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <h1>Cadastrar Usuário</h1>
         <br />
-        <Input
-          type="text"
-          placeholder="Nome"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <Input
-          type="text"
-          placeholder="CPF"
-          value={cpf}
-          onChange={(e) => setCpf(e.target.value)}
-          mask="(^\d{3}\x2E\d{3}\x2E\d{3}\x2D\d{2}$)"
-        />
-        <Input
-          type="text"
-          placeholder="Data de nascimento"
-          value={birth}
-          onChange={(e) => setBirth(e.target.value)}
-        />
-        <Input
-          type="tel"
-          placeholder="Número do Telefone"
-          value={cell}
-          onChange={(e) => setCell(e.target.value)}
-        />
-        <Button />
+        <label>
+          Nome:
+          <Input
+            type="text"
+            placeholder="Nome"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </label>
+        <br />
+        <label>
+          CPF:
+          <Input
+            type="text"
+            placeholder="CPF"
+            value={cpf}
+            onChange={(e) => setCpf(e.target.value)}
+            required
+          />
+        </label>
+        <br />
+        <label>
+          Data de Nascimento:
+          <Input
+            type="date"
+            value={birth}
+            onChange={(e) => setBirth(e.target.value)}
+            required
+          />
+        </label>
+        <br />
+        <label>
+          Número de Celular:
+          <Input
+            type="text"
+            placeholder="Nº de Celular"
+            value={cell}
+            onChange={(e) => setCell(e.target.value)}
+          />
+        </label>
+        <br />
+        <Button type="submit">Cadastrar</Button>
       </form>
 
-      {dadosEnviados.length > 0 && (
+      {users.length > 0 && (
         <div>
-          <h2>Dados Enviados</h2>
+          <h2>Usuários Cadastrados</h2>
           <table>
             <thead>
               <tr>
                 <th>Nome</th>
                 <th>CPF</th>
                 <th>Data de Nascimento</th>
-                <th style={{padding: 10}}>Número do Telefone</th>
+                <th>Nº de Celular</th>
               </tr>
             </thead>
             <tbody>
-              {dadosEnviados.map((dados, index) => (
+              {users.map((user, index) => (
                 <tr key={index}>
-                  <td style={{padding: 10}}>{dados.name}</td>
-                  <td style={{padding: 10}}>{dados.cpf}</td>
-                  <td style={{padding: 10}}>{dados.birth}</td>
-                  <td style={{padding: 10}}>{dados.cell}</td>
+                  <td>{user.name}</td>
+                  <td>{user.cpf}</td>
+                  <td>{user.birth}</td>
+                  <td>{user.cell}</td>
                 </tr>
               ))}
             </tbody>
