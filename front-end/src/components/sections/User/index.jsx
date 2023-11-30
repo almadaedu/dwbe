@@ -78,7 +78,7 @@ const User = () => {
       </form>
 
       {dadosEnviados.length > 0 && (
-        <div>
+        <>
           <h2>Dados Enviados</h2>
           <table>
             <thead>
@@ -86,21 +86,21 @@ const User = () => {
                 <th>Nome</th>
                 <th>CPF</th>
                 <th>Data de Nascimento</th>
-                <th style={{padding: 10}}>Número do Telefone</th>
+                <th style={{ padding: 10 }}>Número do Telefone</th>
               </tr>
             </thead>
             <tbody>
               {dadosEnviados.map((dados, index) => (
                 <tr key={index}>
-                  <td style={{padding: 10}}>{dados.name}</td>
-                  <td style={{padding: 10}}>{dados.cpf}</td>
-                  <td style={{padding: 10}}>{dados.birth}</td>
-                  <td style={{padding: 10}}>{dados.cell}</td>
+                  <td style={{ padding: 10 }}>{dados.name}</td>
+                  <td style={{ padding: 10 }}>{dados.cpf}</td>
+                  <td style={{ padding: 10 }}>{dados.birth}</td>
+                  <td style={{ padding: 10 }}>{dados.cell}</td>
                 </tr>
               ))}
             </tbody>
           </table>
-        </div>
+        </>
       )}
     </div>
   );
