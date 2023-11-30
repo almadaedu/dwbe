@@ -8,22 +8,7 @@ const Booking = () => {
   const [bookingStatus, setBookingStatus] = useState("");
   const [selectedUser, setSelectedUser] = useState("");
   const [booking, setBooking] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:8080/booking")
-      .then((response) => setBooking(response.data))
-      .catch((error) => console.error("Erro ao carregar reservas", error));
-  }, []);
-
   const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:8080/users")
-      .then((response) => setUsers(response.data))
-      .catch((error) => console.error("Erro ao carregar usuários", error));
-  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -51,8 +36,10 @@ const Booking = () => {
 
   const handleAssociateUser = async () => {
     try {
+      
+
       const response = await axios.put(
-        `http://localhost:8080/booking/2/user/${selectedUser}`
+        `http://localhost:8080/booking/1/user/${selectedUser}`
       );
 
       if (response.status === 200) {
@@ -64,6 +51,20 @@ const Booking = () => {
       console.error("Erro:", error.message);
     }
   };
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/booking")
+      .then((response) => setBooking(response.data))
+      .catch((error) => console.error("Erro ao carregar reservas", error));
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/users")
+      .then((response) => setUsers(response.data))
+      .catch((error) => console.error("Erro ao carregar usuários", error));
+  }, []);
 
   return (
     <div>
@@ -98,10 +99,12 @@ const Booking = () => {
             ))}
           </select>
           <button type="button" onClick={handleAssociateUser}>
-            Associar Usuário à Reserva
-          </button>
+          Associar Usuário à Reserva
+        </button>
         </label>
-        <Button />
+        <Button type="submit">Enviar</Button>
+
+
       </form>
 
       {booking.length > 0 && (
@@ -120,7 +123,7 @@ const Booking = () => {
                 <tr key={index}>
                   <td style={{ padding: 10 }}>{bookingItem.moment}</td>
                   <td style={{ padding: 10 }}>{bookingItem.bookingStatus}</td>
-                  <td style={{ padding: 10 }}>{bookingItem.selectedUser}</td>
+                  <td style={{ padding: 10 }}>{bookingItem.userId}</td>
                 </tr>
               ))}
             </tbody>
