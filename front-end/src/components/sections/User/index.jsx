@@ -21,7 +21,32 @@ const User = () => {
         cell,
       });
 
-      if (response.status === 200) {
+      if (response.status === 200 || 201) {
+        console.log("Dados enviados com sucesso!");
+        setDadosEnviados([
+          ...dadosEnviados,
+          { name, cpf, birth, cell },
+        ]);
+      } else {
+        console.error("Erro ao enviar os dados");
+      }
+    } catch (error) {
+      console.error("Erro:", error);
+    }
+  };
+
+  const handleClick = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await axios.get("http://localhost:8080/users", {
+        name,
+        cpf,
+        birth,
+        cell,
+      });
+
+      if (response.status === 200 || 201) {
         console.log("Dados enviados com sucesso!");
         setDadosEnviados([
           ...dadosEnviados,
@@ -65,28 +90,27 @@ const User = () => {
           value={cell}
           onChange={(e) => setCell(e.target.value)}
         />
-        <Button type="submit">Enviar</Button>
+        <Button />
       </form>
-
       {dadosEnviados.length > 0 && (
         <div>
           <h2>Dados Enviados</h2>
           <table>
             <thead>
               <tr>
-                <th>name</th>
+                <th>Nome</th>
                 <th>CPF</th>
                 <th>Data de Nascimento</th>
-                <th>Número do Telefone</th>
+                <th style={{padding: 10}}>Número do Telefone</th>
               </tr>
             </thead>
             <tbody>
               {dadosEnviados.map((dados, index) => (
                 <tr key={index}>
-                  <td>{dados.name}</td>
-                  <td>{dados.cpf}</td>
-                  <td>{dados.birth}</td>
-                  <td>{dados.cell}</td>
+                  <td style={{padding: 10}}>{dados.name}</td>
+                  <td style={{padding: 10}}>{dados.cpf}</td>
+                  <td style={{padding: 10}}>{dados.birth}</td>
+                  <td style={{padding: 10}}>{dados.cell}</td>
                 </tr>
               ))}
             </tbody>

@@ -17,7 +17,7 @@ const Booking = () => {
         bookingStatus,
       });
 
-      if (response.status === 200) {
+      if (response.status === 200 || 201) {
         console.log("Dados enviados com sucesso!");
         setDadosEnviados([
           ...dadosEnviados,
@@ -48,8 +48,9 @@ const Booking = () => {
           value={bookingStatus}
           onChange={(e) => setBookingStatus(e.target.value)}
         />
-        <Button type="submit">Enviar</Button>
+        <Button />
       </form>
+
 
       {dadosEnviados.length > 0 && (
         <div>
@@ -64,8 +65,8 @@ const Booking = () => {
             <tbody>
               {dadosEnviados.map((dados, index) => (
                 <tr key={index}>
-                  <td>{dados.moment}</td>
-                  <td>{dados.bookingStatus}</td>
+                  <td style={{padding: 10}}>{dados.moment}</td>
+                  <td style={{padding: 10}}>{dados.bookingStatus}</td>
                 </tr>
               ))}
             </tbody>

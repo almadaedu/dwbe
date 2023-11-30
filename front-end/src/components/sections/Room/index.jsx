@@ -22,7 +22,7 @@ const Room = () => {
         image,
       });
 
-      if (response.status === 200) {
+      if (response.status === 200 || 201) {
         console.log("Dados enviados com sucesso!");
         setDadosEnviados([
           ...dadosEnviados,
@@ -90,11 +90,11 @@ const Room = () => {
             <tbody>
               {dadosEnviados.map((dados, index) => (
                 <tr key={index}>
-                  <td>{dados.name}</td>
-                  <td>{dados.description}</td>
-                  <td>{dados.price}</td>
-                  <td>{dados.image}</td>
-                  <td>{dados.category}</td>
+                  <td style={{padding: 10}}>{dados.name}</td>
+                  <td style={{padding: 10}}>{dados.description}</td>
+                  <td style={{padding: 10}}>{dados.price}</td>
+                  <td style={{padding: 10}}>{dados.image}</td>
+                  <td style={{padding: 10}}>{dados.category}</td>
                 </tr>
               ))}
             </tbody>

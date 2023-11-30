@@ -15,7 +15,7 @@ const User = () => {
         name,
       });
 
-      if (response.status === 200) {
+      if (response.status === 200 || 201) {
         console.log("Dados enviados com sucesso!");
         setDadosEnviados([...dadosEnviados, { name }]);
       } else {
@@ -52,7 +52,7 @@ const User = () => {
             <tbody>
               {dadosEnviados.map((dados, index) => (
                 <tr key={index}>
-                  <td>{dados.name}</td>
+                  <td style={{padding: 10}}>{dados.name}</td>
                 </tr>
               ))}
             </tbody>

@@ -1,9 +1,9 @@
 import React from "react";
 import "./styles.css";
 
-const Button = ({ placeholder }) => {
+const Button = ({placeholder}) => {
   return (
-    <div>
+    <div className="inputContainer">
       <input type="submit" placeholder={placeholder}></input>
     </div>
   );

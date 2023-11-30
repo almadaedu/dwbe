@@ -15,7 +15,7 @@ const Payment = () => {
         moment,
       });
 
-      if (response.status === 200) {
+      if (response.status === 200 || 201) {
         console.log("Dados enviados com sucesso!");
         setDadosEnviados([
           ...dadosEnviados,
@@ -56,7 +56,7 @@ const Payment = () => {
             <tbody>
               {dadosEnviados.map((dados, index) => (
                 <tr key={index}>
-                  <td>{dados.moment}</td>
+                  <td style={{padding: 10}}>{dados.moment}</td>
                 </tr>
               ))}
             </tbody>
