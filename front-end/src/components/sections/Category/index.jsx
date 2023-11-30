@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../../micros/input";
 import Button from "../../micros/button";
 import axios from "axios";
@@ -25,6 +25,15 @@ const User = () => {
       console.error("Erro:", error);
     }
   };
+
+  useEffect(()=>{
+    fetch("http://localhost:8080/category")
+    .then(res=>res.json())
+    .then((result)=>{
+      setDadosEnviados(result);
+    }
+  )
+  },[])
 
   return (
     <div>

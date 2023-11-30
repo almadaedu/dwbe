@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../../micros/input";
 import Button from "../../micros/button";
 import axios from "axios";
@@ -35,30 +35,14 @@ const User = () => {
     }
   };
 
-  const handleClick = async (event) => {
-    event.preventDefault();
-
-    try {
-      const response = await axios.get("http://localhost:8080/users", {
-        name,
-        cpf,
-        birth,
-        cell,
-      });
-
-      if (response.status === 200 || 201) {
-        console.log("Dados enviados com sucesso!");
-        setDadosEnviados([
-          ...dadosEnviados,
-          { name, cpf, birth, cell },
-        ]);
-      } else {
-        console.error("Erro ao enviar os dados");
-      }
-    } catch (error) {
-      console.error("Erro:", error);
+  useEffect(()=>{
+    fetch("http://localhost:8080/users")
+    .then(res=>res.json())
+    .then((result)=>{
+      setDadosEnviados(result);
     }
-  };
+  )
+  },[])
 
   return (
     <div>
@@ -92,6 +76,7 @@ const User = () => {
         />
         <Button />
       </form>
+
       {dadosEnviados.length > 0 && (
         <div>
           <h2>Dados Enviados</h2>
