@@ -78,53 +78,53 @@ const Room = () => {
         <h1>Cadastrar Quarto</h1>
         <br />
         <label>
-          Nome: 
-        <Input
-          type="text"
-          placeholder="Nome"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+          Nome:
+          <Input
+            type="text"
+            placeholder="Nome"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
         </label>
         <label>
           Descrição:
-        <Input
-          type="text"
-          placeholder="Descrição"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
+          <Input
+            type="text"
+            placeholder="Descrição"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
         </label>
         <label>
           Valor:
-        <Input
-          type="number"
-          placeholder="Valor"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
+          <Input
+            type="number"
+            placeholder="Valor"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+          />
         </label>
         <label>
           Categoria:
-        <select
-          name="selectedRoom"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        >
-          <option>Selecione uma categoria</option>
-          {roomCategory.length > 0 ? (
-            roomCategory.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))
-          ) : (
-            <option disabled>Carregando categorias...</option>
-          )}
-        </select>
+          <select
+            name="selectedRoom"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <option>Selecione uma categoria</option>
+            {roomCategory.length > 0 ? (
+              roomCategory.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))
+            ) : (
+              <option disabled>Carregando categorias...</option>
+            )}
+          </select>
         </label>
         <button type="button" onClick={handleAssociateCategory}>
-            Adicionar
+          Adicionar
         </button>
         <Button type="submit">Enviar</Button>
       </form>
@@ -147,7 +147,9 @@ const Room = () => {
                   <td style={{ padding: 10 }}>{dados.name}</td>
                   <td style={{ padding: 10 }}>{dados.description}</td>
                   <td style={{ padding: 10 }}>{dados.price}</td>
-                  <td style={{ padding: 10 }}>{dados.category.name}</td>
+                  <td style={{ padding: 10 }}>
+                    {dados.category ? dados.category.name : "N/A"}
+                  </td>
                 </tr>
               ))}
             </tbody>

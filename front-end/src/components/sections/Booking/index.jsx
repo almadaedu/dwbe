@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import Input from "../../micros/input";
 import Button from "../../micros/button";
 import axios from "axios";
-import { Modal } from "@mui/material";
 
 const Booking = () => {
   const [moment, setMoment] = useState("");
   const [bookingStatus, setBookingStatus] = useState("");
-  const [selectedUser, setSelectedUser] = useState("");
-  const [booking, setBooking] = useState([]);
-  const [users, setUsers] = useState([]);
-  const [room, setRoom] = useState([]);
+  const [users, setUsers] = useState("");
+  const [rooms, setRooms] = useState("");
+  const [usersBooking, setUsersBooking] = useState([]);
+  const [roomsBooking, setRoomsBooking] = useState([]);
+  const [dadosEnviados, setDadosEnviados] = useState([]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -19,14 +19,15 @@ const Booking = () => {
       const response = await axios.post("http://localhost:8080/booking", {
         moment,
         bookingStatus,
-        clientId: selectedUser,
+        userId: users,
+        roomId: rooms,
       });
 
       if (response.status === 200 || response.status === 201) {
         console.log("Dados enviados com sucesso!");
-        setBooking([
-          ...booking,
-          { moment, bookingStatus, userId: selectedUser },
+        setDadosEnviados([
+          ...dadosEnviados,
+          { moment, bookingStatus, userId: users, roomId: rooms },
         ]);
       } else {
         console.error("Erro ao enviar os dados");
@@ -39,7 +40,7 @@ const Booking = () => {
   const handleAssociateUser = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:8080/booking/1/user/${selectedUser}`
+        `http://localhost:8080/booking/1/user/${users}`
       );
 
       if (response.status === 200) {
@@ -55,13 +56,13 @@ const Booking = () => {
   const handleAssociateRoom = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:8080/booking/1/room/${selectedUser}`
+        `http://localhost:8080/booking/1/room/${rooms}`
       );
 
       if (response.status === 200) {
-        alert("Usuário associado com sucesso");
+        alert("Quarto associado com sucesso");
       } else {
-        alert("Erro ao associar usuário à reserva");
+        alert("Erro ao associar quarto à reserva");
       }
     } catch (error) {
       console.error("Erro:", error.message);
@@ -69,25 +70,28 @@ const Booking = () => {
   };
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/booking")
-      .then((response) => setBooking(response.data))
-      .catch((error) => console.error("Erro ao carregar reservas", error));
+    fetch("http://localhost:8080/booking")
+      .then((res) => res.json())
+      .then((result) => {
+        setDadosEnviados(result);
+      });
   }, []);
 
   useEffect(() => {
     axios
       .get("http://localhost:8080/users")
-      .then((response) => setUsers(response.data))
+      .then((response) => setUsersBooking(response.data))
       .catch((error) => console.error("Erro ao carregar usuários", error));
   }, []);
 
   useEffect(() => {
     axios
       .get("http://localhost:8080/room")
-      .then((response) => setRoom(response.data))
-      .catch((error) => console.error("Erro ao carregar usuários", error));
+      .then((response) => setRoomsBooking(response.data))
+      .catch((error) => console.error("Erro ao carregar quartos", error));
   }, []);
+
+
 
   return (
     <div>
@@ -116,13 +120,13 @@ const Booking = () => {
           Selecionar Usuário:
           <br />
           <select
-            name="selectedUser"
-            value={selectedUser}
-            onChange={(e) => setSelectedUser(e.target.value)}
+            name="users"
+            value={users}
+            onChange={(e) => setUsers(e.target.value)}
             required
           >
             <option>Selecione um usuário</option>
-            {users.map((user) => (
+            {usersBooking.map((user) => (
               <option key={user.id} value={user.id}>
                 {user.name}
               </option>
@@ -138,15 +142,15 @@ const Booking = () => {
           Selecionar Quarto:
           <br />
           <select
-            name="selectedUser"
-            value={selectedUser}
-            onChange={(e) => setSelectedUser(e.target.value)}
+            name="rooms"
+            value={rooms}
+            onChange={(e) => setRooms(e.target.value)}
             required
           >
             <option>Selecione um quarto</option>
-            {room.map((user) => (
-              <option key={user.id} value={user.id}>
-                {user.name}
+            {roomsBooking.map((rooms) => (
+              <option key={rooms.id} value={rooms.id}>
+                {rooms.name}
               </option>
             ))}
           </select>
@@ -154,34 +158,44 @@ const Booking = () => {
             Associar Quarto à Reserva
           </button>
         </label>
+        <br />
+        <br />
 
         <Button type="submit">Enviar</Button>
       </form>
 
-      {booking.length > 0 && (
+      {dadosEnviados.length > 0 && (
         <div>
-          <h2>Dados Enviados</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Momento</th>
-                <th>Booking Status</th>
-                <th>ID do Usuário</th>
+        <h2>Dados Enviados</h2>
+        <table>
+          <thead>
+          <tr>
+                <th>Momento do agendamento</th>
+                <th>Status do agendamento</th>
               </tr>
-            </thead>
-            <tbody>
-              {booking.map((bookingItem, index) => (
+          </thead>
+          <tbody>
+              {dadosEnviados.map((dados, index) => (
                 <tr key={index}>
-                  <td style={{ padding: 10 }}>{bookingItem.moment}</td>
-                  <td style={{ padding: 10 }}>{bookingItem.bookingStatus}</td>
-                  <td style={{ padding: 10 }}>{selectedUser.id}</td>
+                  <td style={{ padding: 10 }}>{dados.moment}</td>
+                  <td style={{ padding: 10 }}>{dados.bookingStatus}</td>
+                  <td style={{ padding: 10 }}>
+                    {dados.users &&
+                      usersBooking.find((user) => user.id === dados.users)
+                        ?.name}
+                  </td>
+                  <td style={{ padding: 10 }}>
+                    {dados.rooms &&
+                      roomsBooking.find((room) => room.id === dados.rooms)
+                        ?.name}
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
       )}
-    </div>
+      </div>
   );
 };
 

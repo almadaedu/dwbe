@@ -17,11 +17,6 @@ const Header = () => {
           </RouterLink>
         </li>
         <li>
-          <RouterLink className="tab" to="/payment">
-            Pagamentos
-          </RouterLink>
-        </li>
-        <li>
           <RouterLink className="tab" to="/room">
             Quartos
           </RouterLink>
