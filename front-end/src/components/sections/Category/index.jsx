@@ -10,6 +10,11 @@ const User = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (dadosEnviados.some((dados) => dados.name === name)) {
+      alert("Categoria já existe!");
+      return;
+    }
+
     try {
       const response = await axios.post("http://localhost:8080/category", {
         name,
@@ -19,10 +24,10 @@ const User = () => {
         console.log("Dados enviados com sucesso!");
         setDadosEnviados([...dadosEnviados, { name }]);
       } else {
-        console.error("Erro ao enviar os dados");
+        alert("Erro ao enviar os dados");
       }
     } catch (error) {
-      console.error("Erro:", error);
+      alert("Erro:", error);
     }
   };
 

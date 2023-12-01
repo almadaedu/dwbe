@@ -14,6 +14,11 @@ const Room = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (dadosEnviados.some((dados) => dados.name === name)) {
+      alert("Quarto já existe!");
+      return;
+    }
+
     try {
       const response = await axios.post("http://localhost:8080/room", {
         name,
@@ -29,10 +34,10 @@ const Room = () => {
           { name, description, price, category },
         ]);
       } else {
-        console.error("Erro ao enviar os dados");
+        alert("Erro ao enviar os dados");
       }
     } catch (error) {
-      console.error("Erro:", error);
+      alert("Erro:", error);
     }
   };
 
@@ -43,9 +48,9 @@ const Room = () => {
       );
 
       if (response.status === 200) {
-        console.log("Usuário associado à reserva com sucesso!");
+        alert("Quarto associado à reserva com sucesso!");
       } else {
-        console.error("Erro ao associar usuário à reserva");
+        alert("Erro ao associar quarto à reserva");
       }
     } catch (error) {
       console.error("Erro:", error.message);
@@ -67,37 +72,46 @@ const Room = () => {
       .catch((error) => console.error("Erro ao carregar categorias", error));
   }, []);
 
-  console.log(category);
-
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <h1>Cadastrar Quarto</h1>
         <br />
+        <label>
+          Nome: 
         <Input
           type="text"
           placeholder="Nome"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
+        </label>
+        <label>
+          Descrição:
         <Input
           type="text"
           placeholder="Descrição"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
+        </label>
+        <label>
+          Valor:
         <Input
           type="number"
           placeholder="Valor"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
         />
+        </label>
+        <label>
+          Categoria:
         <select
           name="selectedRoom"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
         >
-          <option>Selecione um quarto</option>
+          <option>Selecione uma categoria</option>
           {roomCategory.length > 0 ? (
             roomCategory.map((category) => (
               <option key={category.id} value={category.id}>
@@ -108,9 +122,10 @@ const Room = () => {
             <option disabled>Carregando categorias...</option>
           )}
         </select>
+        </label>
         <button type="button" onClick={handleAssociateCategory}>
-            Associar Quarto à Reserva
-          </button>
+            Adicionar
+        </button>
         <Button type="submit">Enviar</Button>
       </form>
 
@@ -132,7 +147,7 @@ const Room = () => {
                   <td style={{ padding: 10 }}>{dados.name}</td>
                   <td style={{ padding: 10 }}>{dados.description}</td>
                   <td style={{ padding: 10 }}>{dados.price}</td>
-                  <td style={{ padding: 10 }}>{dados.category}</td>
+                  <td style={{ padding: 10 }}>{dados.category.name}</td>
                 </tr>
               ))}
             </tbody>

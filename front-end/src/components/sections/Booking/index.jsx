@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Input from "../../micros/input";
 import Button from "../../micros/button";
 import axios from "axios";
+import { Modal } from "@mui/material";
 
 const Booking = () => {
   const [moment, setMoment] = useState("");
@@ -42,9 +43,9 @@ const Booking = () => {
       );
 
       if (response.status === 200) {
-        console.log("Usuário associado à reserva com sucesso!");
+        alert("Usuário associado à reserva com sucesso!");
       } else {
-        console.error("Erro ao associar usuário à reserva");
+        alert("Erro ao associar usuário à reserva");
       }
     } catch (error) {
       console.error("Erro:", error.message);
@@ -58,9 +59,9 @@ const Booking = () => {
       );
 
       if (response.status === 200) {
-        console.log("Usuário associado à reserva com sucesso!");
+        alert("Usuário associado com sucesso");
       } else {
-        console.error("Erro ao associar usuário à reserva");
+        alert("Erro ao associar usuário à reserva");
       }
     } catch (error) {
       console.error("Erro:", error.message);
@@ -93,18 +94,24 @@ const Booking = () => {
       <form onSubmit={handleSubmit}>
         <h1>Cadastrar Reserva</h1>
         <br />
-        <Input
-          type="datetime-local"
-          placeholder="Momento"
-          value={moment}
-          onChange={(e) => setMoment(e.target.value)}
-        />
-        <Input
-          type="integer"
-          placeholder="Status do pagamento"
-          value={bookingStatus}
-          onChange={(e) => setBookingStatus(e.target.value)}
-        />
+        <label>
+          Data e horário da reserva:
+          <Input
+            type="datetime-local"
+            placeholder="Momento"
+            value={moment}
+            onChange={(e) => setMoment(e.target.value)}
+          />
+        </label>
+        <label>
+          Status do pagamento:
+          <Input
+            type="integer"
+            placeholder="Status do pagamento"
+            value={bookingStatus}
+            onChange={(e) => setBookingStatus(e.target.value)}
+          />
+        </label>
         <label>
           Selecionar Usuário:
           <br />
@@ -167,7 +174,7 @@ const Booking = () => {
                 <tr key={index}>
                   <td style={{ padding: 10 }}>{bookingItem.moment}</td>
                   <td style={{ padding: 10 }}>{bookingItem.bookingStatus}</td>
-                  <td style={{ padding: 10 }}>{bookingItem.userId}</td>
+                  <td style={{ padding: 10 }}>{selectedUser.id}</td>
                 </tr>
               ))}
             </tbody>

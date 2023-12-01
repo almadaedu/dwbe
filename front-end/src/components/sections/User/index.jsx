@@ -13,6 +13,11 @@ const User = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (users.some((user) => user.cpf === cpf)) {
+      alert("Usuário ja existe");
+      return;
+    }
+
     try {
       const response = await axios.post("http://localhost:8080/users", {
         name,
@@ -22,10 +27,10 @@ const User = () => {
       });
 
       if (response.status === 200 || response.status === 201) {
-        console.log("Usuário cadastrado com sucesso!");
+        alert("Usuário cadastrado com sucesso!");
         setUsers([...users, { name, cpf, birth, cell }]);
       } else {
-        console.error("Erro ao cadastrar usuário");
+        alert("Erro ao cadastrar usuário");
       }
     } catch (error) {
       console.error("Erro:", error.message);

@@ -22,7 +22,7 @@ const Payment = () => {
           {moment},
         ]);
       } else {
-        console.error("Erro ao enviar os dados");
+        alert("Erro ao enviar os dados");
       }
     } catch (error) {
       console.error("Erro:", error);
@@ -44,7 +44,7 @@ const Payment = () => {
         <h1>Cadastrar Pagamento</h1>
         <br />
         <Input
-          type="text"
+          type="datetime-local"
           placeholder="Momento"
           value={moment}
           onChange={(e) => setMoment(e.target.value)}
@@ -59,7 +59,6 @@ const Payment = () => {
             <thead>
               <tr>
                 <th>Momento</th>
-                <th>Payment Status</th>
               </tr>
             </thead>
             <tbody>
