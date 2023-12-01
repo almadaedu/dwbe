@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -27,6 +28,6 @@ public class Payment implements Serializable {
     private Long id;
 
     @Column(name = "payment_moment")
-    private Instant moment;
+    private LocalDateTime moment;
 
 }
