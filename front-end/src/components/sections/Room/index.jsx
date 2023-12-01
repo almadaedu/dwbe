@@ -7,7 +7,6 @@ const Room = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  const [image, setImage] = useState("");
   const [category, setCategory] = useState("");
   const [roomCategory, setRoomCategory] = useState("");
   const [dadosEnviados, setDadosEnviados] = useState([]);
@@ -20,21 +19,36 @@ const Room = () => {
         name,
         description,
         price,
-        image,
-        category,
+        categoryId: category,
       });
 
       if (response.status === 200 || response.status === 201) {
         console.log("Dados enviados com sucesso!");
         setDadosEnviados([
           ...dadosEnviados,
-          { name, description, price, image, category },
+          { name, description, price, category },
         ]);
       } else {
         console.error("Erro ao enviar os dados");
       }
     } catch (error) {
       console.error("Erro:", error);
+    }
+  };
+
+  const handleAssociateCategory = async () => {
+    try {
+      const response = await axios.put(
+        `http://localhost:8080/room/1/category/${category}`
+      );
+
+      if (response.status === 200) {
+        console.log("Usuário associado à reserva com sucesso!");
+      } else {
+        console.error("Erro ao associar usuário à reserva");
+      }
+    } catch (error) {
+      console.error("Erro:", error.message);
     }
   };
 
@@ -78,23 +92,10 @@ const Room = () => {
           value={price}
           onChange={(e) => setPrice(e.target.value)}
         />
-        <Input
-          type="text"
-          placeholder="Foto"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
-        />
-        {/* <Input
-          type="text"
-          placeholder="Categoria"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        /> */}
         <select
           name="selectedRoom"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          required
         >
           <option>Selecione um quarto</option>
           {roomCategory.length > 0 ? (
@@ -107,6 +108,9 @@ const Room = () => {
             <option disabled>Carregando categorias...</option>
           )}
         </select>
+        <button type="button" onClick={handleAssociateCategory}>
+            Associar Quarto à Reserva
+          </button>
         <Button type="submit">Enviar</Button>
       </form>
 
@@ -119,7 +123,6 @@ const Room = () => {
                 <th>Nome</th>
                 <th>Descrição</th>
                 <th>Price</th>
-                <th>URL da imagem</th>
                 <th>Categoria</th>
               </tr>
             </thead>
@@ -129,7 +132,6 @@ const Room = () => {
                   <td style={{ padding: 10 }}>{dados.name}</td>
                   <td style={{ padding: 10 }}>{dados.description}</td>
                   <td style={{ padding: 10 }}>{dados.price}</td>
-                  <td style={{ padding: 10 }}>{dados.image}</td>
                   <td style={{ padding: 10 }}>{dados.category}</td>
                 </tr>
               ))}
