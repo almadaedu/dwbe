@@ -9,6 +9,7 @@ const Room = () => {
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
   const [category, setCategory] = useState("");
+  const [roomCategory, setRoomCategory] = useState("");
   const [dadosEnviados, setDadosEnviados] = useState([]);
 
   const handleSubmit = async (event) => {
@@ -20,9 +21,10 @@ const Room = () => {
         description,
         price,
         image,
+        category,
       });
 
-      if (response.status === 200 || 201) {
+      if (response.status === 200 || response.status === 201) {
         console.log("Dados enviados com sucesso!");
         setDadosEnviados([
           ...dadosEnviados,
@@ -36,14 +38,22 @@ const Room = () => {
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     fetch("http://localhost:8080/room")
-    .then(res=>res.json())
-    .then((result)=>{
-      setDadosEnviados(result);
-    }
-  )
-  },[])
+      .then((res) => res.json())
+      .then((result) => {
+        setDadosEnviados(result);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/category")
+      .then((response) => setRoomCategory(response.data))
+      .catch((error) => console.error("Erro ao carregar categorias", error));
+  }, []);
+
+  console.log(category);
 
   return (
     <div>
@@ -74,12 +84,29 @@ const Room = () => {
           value={image}
           onChange={(e) => setImage(e.target.value)}
         />
-        <Input
+        {/* <Input
           type="text"
           placeholder="Categoria"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-        />
+        /> */}
+        <select
+          name="selectedRoom"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          required
+        >
+          <option>Selecione um quarto</option>
+          {roomCategory.length > 0 ? (
+            roomCategory.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))
+          ) : (
+            <option disabled>Carregando categorias...</option>
+          )}
+        </select>
         <Button type="submit">Enviar</Button>
       </form>
 
@@ -99,11 +126,11 @@ const Room = () => {
             <tbody>
               {dadosEnviados.map((dados, index) => (
                 <tr key={index}>
-                  <td style={{padding: 10}}>{dados.name}</td>
-                  <td style={{padding: 10}}>{dados.description}</td>
-                  <td style={{padding: 10}}>{dados.price}</td>
-                  <td style={{padding: 10}}>{dados.image}</td>
-                  <td style={{padding: 10}}>{dados.category}</td>
+                  <td style={{ padding: 10 }}>{dados.name}</td>
+                  <td style={{ padding: 10 }}>{dados.description}</td>
+                  <td style={{ padding: 10 }}>{dados.price}</td>
+                  <td style={{ padding: 10 }}>{dados.image}</td>
+                  <td style={{ padding: 10 }}>{dados.category}</td>
                 </tr>
               ))}
             </tbody>

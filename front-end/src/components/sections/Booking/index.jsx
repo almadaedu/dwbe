@@ -9,6 +9,7 @@ const Booking = () => {
   const [selectedUser, setSelectedUser] = useState("");
   const [booking, setBooking] = useState([]);
   const [users, setUsers] = useState([]);
+  const [room, setRoom] = useState([]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -36,10 +37,24 @@ const Booking = () => {
 
   const handleAssociateUser = async () => {
     try {
-      
-
       const response = await axios.put(
         `http://localhost:8080/booking/1/user/${selectedUser}`
+      );
+
+      if (response.status === 200) {
+        console.log("Usuário associado à reserva com sucesso!");
+      } else {
+        console.error("Erro ao associar usuário à reserva");
+      }
+    } catch (error) {
+      console.error("Erro:", error.message);
+    }
+  };
+
+  const handleAssociateRoom = async () => {
+    try {
+      const response = await axios.put(
+        `http://localhost:8080/booking/1/room/${selectedUser}`
       );
 
       if (response.status === 200) {
@@ -66,6 +81,13 @@ const Booking = () => {
       .catch((error) => console.error("Erro ao carregar usuários", error));
   }, []);
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/room")
+      .then((response) => setRoom(response.data))
+      .catch((error) => console.error("Erro ao carregar usuários", error));
+  }, []);
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -85,6 +107,7 @@ const Booking = () => {
         />
         <label>
           Selecionar Usuário:
+          <br />
           <select
             name="selectedUser"
             value={selectedUser}
@@ -99,12 +122,33 @@ const Booking = () => {
             ))}
           </select>
           <button type="button" onClick={handleAssociateUser}>
-          Associar Usuário à Reserva
-        </button>
+            Associar Usuário à Reserva
+          </button>
         </label>
+        <br />
+        <br />
+        <label>
+          Selecionar Quarto:
+          <br />
+          <select
+            name="selectedUser"
+            value={selectedUser}
+            onChange={(e) => setSelectedUser(e.target.value)}
+            required
+          >
+            <option>Selecione um quarto</option>
+            {room.map((user) => (
+              <option key={user.id} value={user.id}>
+                {user.name}
+              </option>
+            ))}
+          </select>
+          <button type="button" onClick={handleAssociateRoom}>
+            Associar Quarto à Reserva
+          </button>
+        </label>
+
         <Button type="submit">Enviar</Button>
-
-
       </form>
 
       {booking.length > 0 && (
