@@ -48,9 +48,9 @@ const Room = () => {
       );
 
       if (response.status === 200) {
-        alert("Quarto associado à reserva com sucesso!");
+        alert("Categoria associado à quarto com sucesso!");
       } else {
-        alert("Erro ao associar quarto à reserva");
+        alert("Erro ao associar categoria à quarto");
       }
     } catch (error) {
       console.error("Erro:", error.message);

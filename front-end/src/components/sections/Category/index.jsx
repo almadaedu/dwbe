@@ -3,7 +3,7 @@ import Input from "../../micros/input";
 import Button from "../../micros/button";
 import axios from "axios";
 
-const User = () => {
+const Category = () => {
   const [name, setName] = useState("");
   const [dadosEnviados, setDadosEnviados] = useState([]);
 
@@ -77,4 +77,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default Category;
